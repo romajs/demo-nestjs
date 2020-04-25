@@ -13,7 +13,7 @@ export class CatsService {
   }
 
   async findAll(): Promise<Cat[]> {
-    return this.catModel.findAll<Cat>();
+    return this.catModel.findAll({ where: {} })
   }
 
   findById(id: number): Promise<Cat> {
