@@ -1,9 +1,19 @@
+
 import { Module } from '@nestjs/common';
-import { databaseProviders } from '@src/modules/database/database.providers';
+import { SequelizeModule } from '@nestjs/sequelize';
 
 @Module({
-  providers: [...databaseProviders],
-  exports: [...databaseProviders],
+  imports: [
+    SequelizeModule.forRoot({
+      dialect: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'demo-nestjs',
+      password: '123mudar',
+      database: 'demo-nestjs',
+      autoLoadModels: true,
+      synchronize: true,
+    }),
+  ],
 })
-
 export class DatabaseModule {}

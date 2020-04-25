@@ -1,26 +1,26 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { Cat } from './entities/cat.entity';
-import { CATS_REPOSITORY } from '@src/contants';
-import * as R from 'ramda';
+import { Cat } from '@src/modules/cats/models/cat.model';
 import { CreateCatDto } from './dto/cats.dto';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import * as R from 'ramda';
 
 @Injectable()
 export class CatsService {
-  constructor(@Inject(CATS_REPOSITORY) private catsRepository: typeof Cat) {}
+  constructor(@InjectModel(Cat) private catModel: typeof Cat) {}
 
   create(createCatDto: CreateCatDto): Promise<Cat> {
-    return this.catsRepository.create(createCatDto);
+    return this.catModel.create(createCatDto);
   }
 
   async findAll(): Promise<Cat[]> {
-    return this.catsRepository.findAll<Cat>();
+    return this.catModel.findAll<Cat>();
   }
 
   findById(id: number): Promise<Cat> {
-    return this.catsRepository.findOne({ where: { id }})
+    return this.catModel.findOne({ where: { id }})
   }
 
   destroy(id: number): Promise<boolean> {
-    return this.catsRepository.destroy({ where: { id } }).then(R.gt(R.__, 0));
+    return this.catModel.destroy({ where: { id } }).then(R.gt(R.__, 0));
   }
 }

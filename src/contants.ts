@@ -1,2 +1,1 @@
-export const CATS_REPOSITORY = 'CATS_REPOSITORY'
 export const SEQUELIZE = 'SEQUELIZE'

@@ -1,4 +1,4 @@
-import { Cat } from '@src/modules/cats/entities/cat.entity';
+import { Cat } from '@src/modules/cats/models/cat.model';
 import { CatsService } from '@src/modules/cats/cats.service';
 import {
   Controller,
@@ -18,8 +18,8 @@ export class CatsController {
   constructor(private catsService: CatsService) {}
 
   @Post()
-  create(@Body() createCatDto: CreateCatDto): void {
-    this.catsService.create(createCatDto);
+  async create(@Body() createCatDto: CreateCatDto): Promise<void> {
+    const cat = await this.catsService.create(createCatDto);
   }
 
   @Get()
@@ -29,16 +29,14 @@ export class CatsController {
 
   @Get(':id')
   findById(@Param('id') id: number): Promise<Cat> {
-    return this.catsService.findById(id)
+    return this.catsService.findById(id);
   }
 
   @Delete(':id')
-  destroy(@Param('id') id: number, @Res() res: Response): void {
-    this.catsService.destroy(id).then((hasDeleted: boolean) => {
-      console.log({ hasDeleted });
-      res
-        .status(hasDeleted ? HttpStatus.NO_CONTENT : HttpStatus.BAD_REQUEST)
-        .end();
-    });
+  async destroy(@Param('id') id: number, @Res() res: Response): Promise<void> {
+    const hasDeleted: boolean = await this.catsService.destroy(id);
+    res
+      .status(hasDeleted ? HttpStatus.NO_CONTENT : HttpStatus.BAD_REQUEST)
+      .end();
   }
 }
