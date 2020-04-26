@@ -9,15 +9,20 @@ import {
   Delete,
   Res,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateCatDto } from '@src/modules/cats/dto/cats.dto';
 import { Response } from 'express';
+import { Roles } from '../authorization/roles.decorator';
+import { RolesGuard } from '../authorization/roles.guard';
 
 @Controller('cats')
+@UseGuards(RolesGuard)
 export class CatsController {
   constructor(private catsService: CatsService) {}
 
   @Post()
+  @Roles()
   async create(@Body() createCatDto: CreateCatDto): Promise<void> {
     await this.catsService.create(createCatDto);
   }
