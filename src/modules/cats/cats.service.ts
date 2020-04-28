@@ -12,15 +12,15 @@ export class CatsService {
     return this.catModel.create(createCatDto);
   }
 
-  async findAll(): Promise<Cat[]> {
+  findAll(): Promise<Cat[]> {
     return this.catModel.findAll({ where: {} })
   }
 
-  findById(id: number): Promise<Cat> {
+  findOneById(id: number): Promise<Cat> {
     return this.catModel.findOne({ where: { id }})
   }
 
-  destroy(id: number): Promise<boolean> {
+  destroyById(id: number): Promise<boolean> {
     return this.catModel.destroy({ where: { id } }).then(R.gt(R.__, 0));
   }
 }

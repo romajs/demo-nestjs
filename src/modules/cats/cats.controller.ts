@@ -12,9 +12,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreateCatDto } from '@src/modules/cats/dto/cats.dto';
-import { Response } from 'express';
-import { Roles } from '../authorization/roles.decorator';
-import { RolesGuard } from '../authorization/roles.guard';
+import { Roles } from '@src/modules/authorization/roles.decorator';
+import { RolesGuard } from '@src/modules/authorization/roles.guard';
+import { Response } from '@src/types';
 
 @Controller('cats')
 @UseGuards(RolesGuard)
@@ -33,15 +33,13 @@ export class CatsController {
   }
 
   @Get(':id')
-  findById(@Param('id') id: number): Promise<Cat> {
-    return this.catsService.findById(id);
+  findOneById(@Param('id') id: number): Promise<Cat> {
+    return this.catsService.findOneById(id);
   }
 
   @Delete(':id')
-  async destroy(@Param('id') id: number, @Res() res: Response): Promise<void> {
-    const hasDeleted: boolean = await this.catsService.destroy(id);
-    res
-      .status(hasDeleted ? HttpStatus.NO_CONTENT : HttpStatus.BAD_REQUEST)
-      .end();
+  async destroyById(@Param('id') id: number, @Res() res: Response): Promise<void> {
+    const hasDeleted: boolean = await this.catsService.destroyById(id);
+    res.code(hasDeleted ? HttpStatus.NO_CONTENT : HttpStatus.BAD_REQUEST).send()
   }
 }
