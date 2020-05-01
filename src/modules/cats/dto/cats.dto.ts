@@ -6,7 +6,7 @@ export class CreateCatDto {
 
   @IsNotEmpty()
   age: number;
-  
+
   @IsNotEmpty()
   breed: number;
 }

@@ -1,11 +1,13 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from '@src/app.module';
-import { ValidationPipe } from '@nestjs/common';
+import * as pino from 'pino';
+
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import * as pino from 'pino';
+
+import { AppModule } from '@src/app.module';
+import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
 
 const logger = pino({
   redact: ['req.headers.authorization'],

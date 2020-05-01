@@ -1,8 +1,9 @@
+import * as R from 'ramda';
+
 import { Cat } from '@src/modules/cats/models/cat.model';
 import { CreateCatDto } from './dto/cats.dto';
-import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import * as R from 'ramda';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CatsService {
@@ -13,11 +14,11 @@ export class CatsService {
   }
 
   findAll(): Promise<Cat[]> {
-    return this.catModel.findAll({ where: {} })
+    return this.catModel.findAll({ where: {} });
   }
 
   findOneById(id: number): Promise<Cat> {
-    return this.catModel.findOne({ where: { id }})
+    return this.catModel.findOne({ where: { id } });
   }
 
   destroyById(id: number): Promise<boolean> {

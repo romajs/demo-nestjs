@@ -1,4 +1,5 @@
-import { Module, Global } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
+
 import { AppController } from '@src/app.controller';
 import { AppService } from '@src/app.service';
 import { CatsModule } from '@src/modules/cats/cats.module';
