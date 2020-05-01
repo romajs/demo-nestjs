@@ -12,12 +12,13 @@ import {
 import { Cat } from '@src/modules/cats/models/cat.model';
 import { CatsService } from '@src/modules/cats/cats.service';
 import { CreateCatDto } from '@src/modules/cats/dto/cats.dto';
+import { JwtAuthGuard } from '@src/modules/authentication/guards/jwt-auth.guard';
 import { Response } from '@src/types';
 import { Roles } from '@src/modules/authorization/roles.decorator';
 import { RolesGuard } from '@src/modules/authorization/roles.guard';
 
 @Controller('cats')
-@UseGuards(RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class CatsController {
   constructor(private catsService: CatsService) {}
 
