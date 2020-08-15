@@ -29,7 +29,7 @@
     "@nestjs/sequelize": "^0.1.0",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
-    "fastify": "^2.13.1",
+    "fastify": "^2.15.1",
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
