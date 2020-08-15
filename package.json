@@ -1,10 +1,10 @@
 {
   "name": "@romajs/demo-nestjs",
   "version": "0.0.1",
-  "description": "Demo nestjs",
-  "author": "@romajs",
+  "description": "Demo NestJS",
+  "author": "romajs",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
